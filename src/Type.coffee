@@ -2,14 +2,14 @@
 NamedFunction = require "NamedFunction"
 setKind = require "setKind"
 setType = require "setType"
-steal = require "steal"
 
 Validator = require "./Validator"
 
 module.exports =
 ValidatorType = NamedFunction "ValidatorType", (name, config) ->
 
-  init = steal config, "init"
+  init = config.init
+  delete config.init
 
   validatorType = NamedFunction name, ->
     self = Validator config

@@ -1,4 +1,4 @@
-var NamedFunction, Validator, ValidatorType, setKind, setType, steal;
+var NamedFunction, Validator, ValidatorType, setKind, setType;
 
 NamedFunction = require("NamedFunction");
 
@@ -6,13 +6,12 @@ setKind = require("setKind");
 
 setType = require("setType");
 
-steal = require("steal");
-
 Validator = require("./Validator");
 
 module.exports = ValidatorType = NamedFunction("ValidatorType", function(name, config) {
   var init, validatorType;
-  init = steal(config, "init");
+  init = config.init;
+  delete config.init;
   validatorType = NamedFunction(name, function() {
     var self;
     self = Validator(config);
