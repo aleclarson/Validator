@@ -6,7 +6,6 @@ assert = require "assert"
 
 define = Object.defineProperty
 
-module.exports =
 Validator = NamedFunction "Validator", (name, config) ->
 
   if arguments.length is 1
@@ -27,4 +26,16 @@ Validator = NamedFunction "Validator", (name, config) ->
     define self, "name", { get: name }
     self.getName = name
 
-  setType self, Validator
+  return setType self, Validator
+
+module.exports = Validator
+
+Object.defineProperties Validator.prototype,
+
+  isRequired:
+    get: -> { type: this, required: yes }
+    enumerable: yes
+
+  withDefault:
+    value: (value) -> { type: this, default: value }
+    enumerable: yes

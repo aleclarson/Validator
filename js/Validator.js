@@ -10,7 +10,7 @@ assert = require("assert");
 
 define = Object.defineProperty;
 
-module.exports = Validator = NamedFunction("Validator", function(name, config) {
+Validator = NamedFunction("Validator", function(name, config) {
   var self;
   if (arguments.length === 1) {
     config = name;
@@ -35,4 +35,27 @@ module.exports = Validator = NamedFunction("Validator", function(name, config) {
   return setType(self, Validator);
 });
 
-//# sourceMappingURL=../../map/src/Validator.map
+module.exports = Validator;
+
+Object.defineProperties(Validator.prototype, {
+  isRequired: {
+    get: function() {
+      return {
+        type: this,
+        required: true
+      };
+    },
+    enumerable: true
+  },
+  withDefault: {
+    value: function(value) {
+      return {
+        type: this,
+        "default": value
+      };
+    },
+    enumerable: true
+  }
+});
+
+//# sourceMappingURL=map/Validator.map

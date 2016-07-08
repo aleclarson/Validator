@@ -5,18 +5,17 @@ setType = require "setType"
 
 Validator = require "./Validator"
 
-module.exports =
 ValidatorType = NamedFunction "ValidatorType", (name, config) ->
 
   init = config.init
   delete config.init
 
-  validatorType = NamedFunction name, ->
+  type = NamedFunction name, ->
     self = Validator config
-    self.validatorType = validatorType
-    init.apply self, arguments if init
-    return self
+    init and init.apply self, arguments
+    return setType self, type
 
-  setType validatorType, ValidatorType
+  setKind type, Validator
+  return setType type, ValidatorType
 
-setKind ValidatorType, Function
+module.exports = setKind ValidatorType, Function

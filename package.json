@@ -1,7 +1,6 @@
 {
   "name": "Validator",
   "version": "1.0.0",
-  "main": "js/src/index",
   "dependencies": {
     "NamedFunction": "aleclarson/NamedFunction#2.0.0",
     "assert": "aleclarson/assert#1.0.0",
@@ -10,6 +9,7 @@
     "setType": "aleclarson/setType#1.0.0"
   },
   "lotus": {
+    "dest": "js",
     "plugins": [
       "lotus-coffee"
     ]
