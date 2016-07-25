@@ -1,0 +1,19 @@
+{
+  "name": "Validator",
+  "version": "1.0.0",
+  "dependencies": {
+    "NamedFunction": "aleclarson/NamedFunction#2.0.0",
+    "assert": "aleclarson/assert#1.0.0",
+    "isConstructor": "aleclarson/isConstructor#1.0.0",
+    "isDev": "aleclarson/isDev#1.0.0",
+    "setKind": "aleclarson/setKind#1.0.0",
+    "setType": "aleclarson/setType#1.0.0",
+    "steal": "aleclarson/steal#1.1.0"
+  },
+  "lotus": {
+    "dest": "js",
+    "plugins": [
+      "lotus-coffee"
+    ]
+  }
+}
