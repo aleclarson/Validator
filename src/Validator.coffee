@@ -1,8 +1,13 @@
 
+require "isDev"
+
 NamedFunction = require "NamedFunction"
 isConstructor = require "isConstructor"
 setType = require "setType"
 assert = require "assert"
+steal = require "steal"
+
+mergeDefaults = require "./utils/mergeDefaults"
 
 define = Object.defineProperty
 
@@ -10,13 +15,11 @@ Validator = NamedFunction "Validator", (name, config) ->
 
   if arguments.length is 1
     config = name
-    name = config.name or ""
+    name = steal config, "name", ""
 
   assert isConstructor(config, Object), "Must provide a 'config' object!"
 
-  self =
-    test: config.test
-    assert: config.assert
+  self = Object.create Validator.prototype
 
   if isConstructor name, String
     self.name = name
@@ -26,16 +29,15 @@ Validator = NamedFunction "Validator", (name, config) ->
     define self, "name", { get: name }
     self.getName = name
 
-  return setType self, Validator
+  mergeDefaults self, config
+  return self
 
 module.exports = Validator
 
-Object.defineProperties Validator.prototype,
+define Validator.prototype, "isRequired",
+  get: -> { type: this, required: yes }
+  enumerable: yes
 
-  isRequired:
-    get: -> { type: this, required: yes }
-    enumerable: yes
-
-  withDefault:
-    value: (value) -> { type: this, default: value }
-    enumerable: yes
+define Validator.prototype, "withDefault",
+  value: (value) -> { type: this, default: value }
+  enumerable: yes

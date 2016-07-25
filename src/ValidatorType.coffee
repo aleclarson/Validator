@@ -2,20 +2,31 @@
 NamedFunction = require "NamedFunction"
 setKind = require "setKind"
 setType = require "setType"
+steal = require "steal"
 
+mergeDefaults = require "./utils/mergeDefaults"
 Validator = require "./Validator"
 
 ValidatorType = NamedFunction "ValidatorType", (name, config) ->
 
-  init = config.init
-  delete config.init
+  if arguments.length is 1
+    config = name
+    name = steal config, "name", ""
+
+  init = steal config, "init"
 
   type = NamedFunction name, ->
-    self = Validator config
+
+    self = Validator name, {}
+
     init and init.apply self, arguments
-    return setType self, type
+
+    setType self, type
+
+  mergeDefaults type.prototype, config
 
   setKind type, Validator
-  return setType type, ValidatorType
+
+  setType type, ValidatorType
 
 module.exports = setKind ValidatorType, Function
