@@ -18,8 +18,8 @@ define = Object.defineProperty;
 
 Validator = NamedFunction("Validator", function(name, config) {
   var self;
-  if (arguments.length === 1) {
-    config = name;
+  if (arguments.length < 2) {
+    config = name || {};
     name = steal(config, "name", "");
   }
   assert(isConstructor(config, Object), "Must provide a 'config' object!");

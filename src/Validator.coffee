@@ -13,8 +13,8 @@ define = Object.defineProperty
 
 Validator = NamedFunction "Validator", (name, config) ->
 
-  if arguments.length is 1
-    config = name
+  if arguments.length < 2
+    config = name or {}
     name = steal config, "name", ""
 
   assert isConstructor(config, Object), "Must provide a 'config' object!"
