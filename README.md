@@ -1,5 +1,5 @@
 
-# Validator 1.0.0 ![stable](https://img.shields.io/badge/stability-stable-4EBA0F.svg?style=flat)
+# Validator v1.1.0 ![stable](https://img.shields.io/badge/stability-stable-4EBA0F.svg?style=flat)
 
 Used by [`isType`](https://github.com/aleclarson/isType) and [`assertType`](https://github.com/aleclarson/assertType) to support custom validation.
 
@@ -13,10 +13,16 @@ MyValidator = Validator "MyValidator",
 
   assert: (value, key) ->
     # Must return a kind of Error, or undefined.
-    # You can also return an Object shaped like { error, meta }
-    # with the 'meta' property being an Object that contains
-    # values relevant to the failed assertion.
+```
 
+Here are some modules that use `Validator()`:
+- [Void](https://github.com/aleclarson/Void): Only passes for `undefined`
+- [Null](https://github.com/aleclarson/Null): Only passes for `null`
+- [PureObject](https://github.com/aleclarson/PureObject): Only passes for `Object.create(null)` instances
+
+### Validator.Type
+
+```coffee
 # Use 'Validator.Type' if you need a 'Validator' factory.
 # For example, 'ArrayOf' takes advantage of 'Validator.Type'.
 MyValidator = Validator.Type "MyValidator",
@@ -34,4 +40,7 @@ MyValidator = Validator.Type "MyValidator",
     # This works the same.
 ```
 
-Look at [`ArrayOf`](https://github.com/aleclarson/ArrayOf) as an example.
+Here are some modules that use `Validator.Type()`:
+- [ArrayOf](https://github.com/aleclarson/ArrayOf): Tests the type of each item in an array
+- [OneOf](https://github.com/aleclarson/OneOf): Only passes for a specific set of values
+- [Shape](https://github.com/aleclarson/Shape): Only passes for objects that match a specific schema
