@@ -9,15 +9,12 @@ Validator = require "./Validator"
 
 ValidatorType = NamedFunction "ValidatorType", (name, config) ->
 
-  if arguments.length is 1
-    config = name
-    name = steal config, "name", ""
-
   init = steal config, "init"
+  getName = steal config, "name", -> name
 
   type = NamedFunction name, ->
 
-    self = Validator name, {}
+    self = Validator { name: getName }
 
     init and init.apply self, arguments
 

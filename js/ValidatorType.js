@@ -13,15 +13,16 @@ mergeDefaults = require("./utils/mergeDefaults");
 Validator = require("./Validator");
 
 ValidatorType = NamedFunction("ValidatorType", function(name, config) {
-  var init, type;
-  if (arguments.length === 1) {
-    config = name;
-    name = steal(config, "name", "");
-  }
+  var getName, init, type;
   init = steal(config, "init");
+  getName = steal(config, "name", function() {
+    return name;
+  });
   type = NamedFunction(name, function() {
     var self;
-    self = Validator(name, {});
+    self = Validator({
+      name: getName
+    });
     init && init.apply(self, arguments);
     return setType(self, type);
   });
