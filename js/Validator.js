@@ -42,23 +42,20 @@ Validator = NamedFunction("Validator", function(name, config) {
 module.exports = Validator;
 
 define(Validator.prototype, "isRequired", {
+  enumerable: true,
   get: function() {
     return {
       type: this,
       required: true
     };
-  },
-  enumerable: true
+  }
 });
 
-define(Validator.prototype, "withDefault", {
-  value: function(value) {
-    return {
-      type: this,
-      "default": value
-    };
-  },
-  enumerable: true
-});
+Validator.prototype.withDefault = function(value) {
+  return {
+    type: this,
+    "default": value
+  };
+};
 
 //# sourceMappingURL=map/Validator.map

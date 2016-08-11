@@ -35,9 +35,11 @@ Validator = NamedFunction "Validator", (name, config) ->
 module.exports = Validator
 
 define Validator.prototype, "isRequired",
-  get: -> { type: this, required: yes }
   enumerable: yes
+  get: ->
+    type: this
+    required: yes
 
-define Validator.prototype, "withDefault",
-  value: (value) -> { type: this, default: value }
-  enumerable: yes
+Validator::withDefault = (value) ->
+  type: this
+  default: value
