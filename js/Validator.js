@@ -1,4 +1,4 @@
-var NamedFunction, Validator, assert, define, isConstructor, mergeDefaults, setType, steal;
+var NamedFunction, Validator, define, isConstructor, mergeDefaults, setType, steal;
 
 require("isDev");
 
@@ -7,8 +7,6 @@ NamedFunction = require("NamedFunction");
 isConstructor = require("isConstructor");
 
 setType = require("setType");
-
-assert = require("assert");
 
 steal = require("steal");
 
@@ -22,7 +20,9 @@ Validator = NamedFunction("Validator", function(name, config) {
     config = name || {};
     name = steal(config, "name", "");
   }
-  assert(isConstructor(config, Object), "Must provide a 'config' object!");
+  if (!isConstructor(config, Object)) {
+    throw TypeError("'config' must be an Object!");
+  }
   self = Object.create(Validator.prototype);
   if (isConstructor(name, String)) {
     self.name = name;
@@ -40,22 +40,5 @@ Validator = NamedFunction("Validator", function(name, config) {
 });
 
 module.exports = Validator;
-
-define(Validator.prototype, "isRequired", {
-  enumerable: true,
-  get: function() {
-    return {
-      type: this,
-      required: true
-    };
-  }
-});
-
-Validator.prototype.withDefault = function(value) {
-  return {
-    type: this,
-    "default": value
-  };
-};
 
 //# sourceMappingURL=map/Validator.map
