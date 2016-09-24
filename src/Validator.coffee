@@ -1,9 +1,8 @@
 
-require "isDev"
-
 NamedFunction = require "NamedFunction"
 isConstructor = require "isConstructor"
 setType = require "setType"
+isDev = require "isDev"
 steal = require "steal"
 
 mergeDefaults = require "./utils/mergeDefaults"

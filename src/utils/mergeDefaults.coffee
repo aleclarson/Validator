@@ -1,4 +1,6 @@
 
+isDev = require "isDev"
+
 define = Object.defineProperty
 
 mergeDefaults = (obj, defaults) ->
