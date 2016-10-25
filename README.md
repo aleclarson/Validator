@@ -1,5 +1,5 @@
 
-# Validator v1.1.0 ![stable](https://img.shields.io/badge/stability-stable-4EBA0F.svg?style=flat)
+# Validator v1.1.1 ![stable](https://img.shields.io/badge/stability-stable-4EBA0F.svg?style=flat)
 
 Used by [`isType`](https://github.com/aleclarson/isType) and [`assertType`](https://github.com/aleclarson/assertType) to support custom validation.
 
