@@ -15,6 +15,6 @@
     "isDev": "aleclarson/isDev#2.0.0",
     "setKind": "aleclarson/setKind#1.0.0",
     "setType": "aleclarson/setType#1.0.0",
-    "steal": "aleclarson/steal#1.1.0"
+    "steal": "aleclarson/steal#1.2.0"
   }
 }
