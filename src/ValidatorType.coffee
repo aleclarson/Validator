@@ -4,26 +4,25 @@ setKind = require "setKind"
 setType = require "setType"
 steal = require "steal"
 
-mergeDefaults = require "./utils/mergeDefaults"
 Validator = require "./Validator"
+
+define = Object.defineProperty
 
 ValidatorType = NamedFunction "ValidatorType", (name, config) ->
 
   init = steal config, "init"
-  getName = steal config, "name", -> name
+  displayName = steal config, "name"
 
   type = NamedFunction name, ->
-
-    self = Validator { name: getName }
-
+    self = Validator displayName
     init and init.apply self, arguments
+    return setType self, type
 
-    setType self, type
-
-  mergeDefaults type.prototype, config
+  # Merge the remaining properties into the prototype.
+  for key, value of config
+    define type.prototype, key, {value, configurable: yes}
 
   setKind type, Validator
-
-  setType type, ValidatorType
+  return setType type, ValidatorType
 
 module.exports = setKind ValidatorType, Function
